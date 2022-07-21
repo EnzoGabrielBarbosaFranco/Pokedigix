@@ -1,8 +1,20 @@
 package br.com.digix.pokedigix.Lider;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Lider {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false, length = 15)
     private String nome;
     private int nivel;
+    @Column(nullable = false, length = 0)
     private String insignia;
     public Lider(String nome, int nivel, String insignia) {
         this.nome = nome;
@@ -26,5 +38,8 @@ public class Lider {
     }
     public void setInsignia(String insignia) {
         this.insignia = insignia;
+    }
+    public Object getId() {
+        return this.id;
     }
 }

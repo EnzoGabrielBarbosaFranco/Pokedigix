@@ -1,9 +1,26 @@
 package br.com.digix.pokedigix.Evolucao;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Evolucao {
+    
+    @Id
+    
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private int nivel;
+    
+    @Column(nullable = false, length = 15)
     private String pedra;
+
     private int felicidade;
+    
     public Evolucao(int nivel, String pedra, int felicidade) {
         this.nivel = nivel;
         this.pedra = pedra;
@@ -26,5 +43,8 @@ public class Evolucao {
     }
     public void setFelicidade(int felicidade) {
         this.felicidade = felicidade;
+    }
+    public Object getId() {
+        return this.id;
     }
 }
