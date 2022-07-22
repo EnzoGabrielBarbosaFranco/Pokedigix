@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import br.com.digix.pokedigix.tipo.Tipo;
 
 @Entity
 public class Ataque {
@@ -24,16 +29,24 @@ public class Ataque {
     @Column(nullable = false, length = 15)
     private String descricao;
 
+    @ManyToOne
+    private Tipo tipo;
+
     @Column(nullable = false, length = 15)
     private String nome;
 
-    public Ataque(Long idEsperado, int forca, double acuracia, int pontosDePoder, String categoria, String descricao, String nome) {
+    public Ataque(int forca, double acuracia, int pontosDePoder, String categoria, String descricao, String nome, Tipo tipo) {
         this.forca = forca;
         this.acuracia = acuracia;
         this.pontosDePoder = pontosDePoder;
         this.categoria = categoria;
         this.descricao = descricao;
         this.nome = nome;
+        this.tipo = tipo;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
     }
 
     public Ataque(String ataqueEsperado) {
@@ -75,7 +88,7 @@ public class Ataque {
         this.nome = nome;
     }
 
-    public Object getId() {
+    public Long getId() {
         return this.id;
     }
 }

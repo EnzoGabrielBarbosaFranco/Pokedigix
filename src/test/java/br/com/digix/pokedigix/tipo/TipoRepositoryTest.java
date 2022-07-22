@@ -1,6 +1,10 @@
 package br.com.digix.pokedigix.tipo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +26,16 @@ public class TipoRepositoryTest {
         Tipo tipo = new Tipo(nomeEsperado);
 
         tipoRepository.save(tipo);
+    }
+    
+    @Test
+    public void deve_buscar_um_tipo_pelo_nome() {
+        String nome = "Elétrico";
+        Tipo tipo = new Tipo(nome);
+        tipoRepository.save(tipo);
+
+        Collection<Tipo> tiposRetornados = tipoRepository.findByNome(nome);
+
+        assertTrue(tiposRetornados.contains(tipo));
     }
 }
