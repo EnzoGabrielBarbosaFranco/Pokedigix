@@ -1,10 +1,17 @@
 package br.com.digix.pokedigix.Pokemon;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import br.com.digix.pokedigix.tipo.Tipo;
 
 @Entity
 public class Pokemon {
@@ -17,35 +24,44 @@ public class Pokemon {
     @Column(nullable = false, length = 25)
     private String nome;
 
+    @Column(nullable = false)
     private int nivel;
+
+    @Column(nullable = false)
     private int felicidade;
 
-    @Column(nullable = false, length = 20)
-    private String tipo;
+    @ManyToMany
+    private Collection<Tipo> tipos;
     
+    @Column(nullable = false)
     private double altura;
+
+    @Column(nullable = false)
     private double peso;
 
     @Column(nullable = false, length = 20)
     private String genero;
 
+    @Column(nullable = false)
     private int numeroPokedex;
 
     @Column(nullable = false, length = 20)
     private String treinador;
 
-    public Pokemon(String nome, int nivel, int felicidade, String tipo, double altura, double peso, String genero,
-            int numeroPokedex, String treinador) {
+    public Pokemon(String nome, int nivel, int felicidade, double altura, double peso, String genero,
+            int numeroPokedex, String treinador,Collection<Tipo> tipos) {
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
-        this.tipo = tipo;
+        this.tipos = tipos;
         this.altura = altura;
         this.peso = peso;
         this.genero = genero;
         this.numeroPokedex = numeroPokedex;
         this.treinador = treinador;
     }
+
+ 
     public String getNome() {
         return nome;
     }
@@ -64,11 +80,11 @@ public class Pokemon {
     public void setFelicidade(int felicidade) {
         this.felicidade = felicidade;
     }
-    public String getTipo() {
-        return tipo;
+    public Collection <Tipo> getTipos() {
+        return tipos;
     }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipo(Tipo tipo) {
+        this.tipos = tipos;
     }
     public double getAltura() {
         return altura;
