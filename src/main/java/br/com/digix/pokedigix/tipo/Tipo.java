@@ -15,14 +15,15 @@ import br.com.digix.pokedigix.Pokemon.Pokemon;
 
 @Entity
 
- public class Tipo {
+public class Tipo {
 
     @Id
+    
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(nullable = false, length = 15)
-    
+
     private String nome;
 
     @ManyToMany(mappedBy = "tipos")
@@ -43,9 +44,11 @@ import br.com.digix.pokedigix.Pokemon.Pokemon;
     public String getNome() {
         return nome;
     }
+
     public Long getId() {
         return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

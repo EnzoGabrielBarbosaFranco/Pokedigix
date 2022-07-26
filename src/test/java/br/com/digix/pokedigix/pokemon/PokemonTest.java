@@ -1,5 +1,6 @@
 package br.com.digix.pokedigix.pokemon;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class PokemonTest {
         List<Tipo> tipos = new ArrayList<>();
         tipos.add( new Tipo("Elétrico"));
 
-        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada ,alturaEsperada, pesoEsperado, generoEsperado, numeroPokedexEsperado, treinadorEsperado, tipos);
+        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada ,alturaEsperada, pesoEsperado, generoEsperado, numeroPokedexEsperado, treinadorEsperado, tipos, null);
 
         assertEquals(nomeEsperado, pokemon.getNome());
         assertEquals(nivelEsperado, pokemon.getNivel());
@@ -40,27 +41,10 @@ public class PokemonTest {
 
     @Test 
     public void deve_cadastrar_um_tipo_para_o_pokemon() {
-        String nomeEsperado = "Pikachu";
-        int nivelEsperado = 100;
-        int felicidadeEsperada = 100;
-        double alturaEsperada = 0.40;
-        double pesoEsperado = 6.00;
-        String generoEsperado = "Masculino";
-        int numeroPokedexEsperado = 25;
-        String treinadorEsperado = "EnzoEletropau";
-        List<Tipo> tipos = new ArrayList<>();
-        tipos.add( new Tipo("Elétrico"));
+        Tipo tipo = new Tipo("Elétrico");
 
-        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada, alturaEsperada, pesoEsperado, generoEsperado, numeroPokedexEsperado, treinadorEsperado, tipos);
+        Pokemon pokemon = new PokemonBuilder().comTipo(tipo).construir();
 
-        assertEquals(nomeEsperado, pokemon.getNome());
-        assertEquals(nivelEsperado, pokemon.getNivel());
-        assertEquals(felicidadeEsperada, pokemon.getFelicidade());
-        assertEquals(tipos, pokemon.getTipos());
-        assertEquals(alturaEsperada, pokemon.getAltura());
-        assertEquals(pesoEsperado, pokemon.getPeso());
-        assertEquals(generoEsperado, pokemon.getGenero());
-        assertEquals(numeroPokedexEsperado, pokemon.getNumeroPokedex());
-        assertEquals(treinadorEsperado, pokemon.getTreinador());
+        assertTrue(pokemon.getTipos().contains(tipo));
     }
 }

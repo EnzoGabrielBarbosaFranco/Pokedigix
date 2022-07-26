@@ -2,6 +2,7 @@ package br.com.digix.pokedigix.Pokemon;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,8 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import br.com.digix.pokedigix.Ataque.Ataque;
 import br.com.digix.pokedigix.tipo.Tipo;
 
 @Entity
@@ -30,7 +34,12 @@ public class Pokemon {
     @Column(nullable = false)
     private int felicidade;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "pokemon_tipo",
+        joinColumns = @JoinColumn(name = "pokemon_id"),
+        inverseJoinColumns = @JoinColumn(name = "tipo_id")
+    )
     private Collection<Tipo> tipos;
     
     @Column(nullable = false)
@@ -48,8 +57,21 @@ public class Pokemon {
     @Column(nullable = false, length = 20)
     private String treinador;
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "pokemon_ataque",
+        joinColumns = @JoinColumn(name = "pokemon_id"),
+        inverseJoinColumns = @JoinColumn(name = "ataque_id")
+    )
+    private Collection<Ataque> ataques;
+
+    public Collection<Ataque> getAtaques() {
+        return ataques;
+    }
+
+
     public Pokemon(String nome, int nivel, int felicidade, double altura, double peso, String genero,
-            int numeroPokedex, String treinador,Collection<Tipo> tipos) {
+            int numeroPokedex, String treinador,Collection<Tipo> tipos, Collection<Ataque> ataques) {
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
@@ -59,6 +81,7 @@ public class Pokemon {
         this.genero = genero;
         this.numeroPokedex = numeroPokedex;
         this.treinador = treinador;
+        this.ataques = ataques;
     }
 
  
@@ -116,7 +139,7 @@ public class Pokemon {
     public void setTreinador(String treinador) {
         this.treinador = treinador;
     }
-    public Object getId() {
+    public Long getId() {
         return this.id;
     }
 }
