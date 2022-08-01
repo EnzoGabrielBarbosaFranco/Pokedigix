@@ -11,8 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import br.com.digix.pokedigix.Ataque.AcuraciaInvalidaException;
 import br.com.digix.pokedigix.Ataque.Ataque;
 import br.com.digix.pokedigix.Ataque.AtaqueRepository;
+import br.com.digix.pokedigix.Ataque.Categoria;
+import br.com.digix.pokedigix.Ataque.ForcaInvalidaParaCategoriaException;
+import br.com.digix.pokedigix.Ataque.TipoInvalidaParaCategoriaException;
 import br.com.digix.pokedigix.tipo.Tipo;
 import br.com.digix.pokedigix.tipo.TipoRepository;
 
@@ -26,11 +30,11 @@ public class AtaqueRepositoryTest {
     private TipoRepository tipoRepository;
 
     @Test
-    public void deve_salvar_um_ataque() {
+    public void deve_salvar_um_ataque() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException {
         int forcaEsperada = 100;
         double acuraciaEsperada = 100;
         int pontosDePoderEsperado = 50;
-        String categoriaEsperada = "Eletrico";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
         String descricaoEsperada = "Top";
         String nomeEsperado = "Eletrico";
         Tipo tipoEsperado = new Tipo("Elétrico");
@@ -49,11 +53,11 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_tipo_para_um_ataque() {
+    public void deve_salvar_um_tipo_para_um_ataque() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException {
         int forcaEsperada = 100;
         double acuraciaEsperada = 100;
         int pontosDePoderEsperado = 50;
-        String categoriaEsperada = "Eletrico";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
         String descricaoEsperada = "Top";
         String nomeEsperado = "Eletrico";
         Tipo tipoEsperado = new Tipo("Elétrico");
@@ -70,11 +74,11 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_ataque_pelo_seu_tipo() {
+    public void deve_salvar_um_ataque_pelo_seu_tipo() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException {
         int forcaEsperada = 100;
         double acuraciaEsperada = 100;
         int pontosDePoderEsperado = 50;
-        String categoriaEsperada = "Eletrico";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
         String descricaoEsperada = "Top";
         String nomeEsperado = "Eletrico";
         Tipo tipoEsperado = new Tipo("Elétrico");
