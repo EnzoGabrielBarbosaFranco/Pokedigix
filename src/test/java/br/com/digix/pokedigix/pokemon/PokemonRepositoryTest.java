@@ -15,6 +15,9 @@ import br.com.digix.pokedigix.Ataque.AcuraciaInvalidaException;
 import br.com.digix.pokedigix.Ataque.Ataque;
 import br.com.digix.pokedigix.Ataque.ForcaInvalidaParaCategoriaException;
 import br.com.digix.pokedigix.Ataque.TipoInvalidaParaCategoriaException;
+import br.com.digix.pokedigix.Pokemon.FelicidadeInvalidaException;
+import br.com.digix.pokedigix.Pokemon.NivelMaiorException;
+import br.com.digix.pokedigix.Pokemon.NivelMenorException;
 import br.com.digix.pokedigix.Pokemon.Pokemon;
 import br.com.digix.pokedigix.ataque.AtaqueBuilder;
 import br.com.digix.pokedigix.tipo.Tipo;
@@ -26,7 +29,7 @@ public class PokemonRepositoryTest {
     private PokemonRepository pokemonRepository;
 
     @Test
-    public void deve_poder_criar_um_pokemon() {
+    public void deve_poder_criar_um_pokemon() throws NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
         Long idEsperado = 1L;
         String nomeEsperado = "Pikachu";
         int nivelEsperado = 100;
@@ -56,7 +59,7 @@ public class PokemonRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_pokemon_com_um_tipo() {
+    public void deve_salvar_um_pokemon_com_um_tipo() throws NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
         int quantidadeDeTiposEsperada = 1;
         List<Tipo> tipos = new ArrayList<>();
         Tipo eletrico = new Tipo("Elétrico");
@@ -73,7 +76,7 @@ public class PokemonRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_pokemon_com_ataque() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException {
+    public void deve_salvar_um_pokemon_com_ataque() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException, NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
         Ataque ataque = new AtaqueBuilder().construir();
         Pokemon pokemon = new PokemonBuilder().comAtaque(ataque).construir();
 

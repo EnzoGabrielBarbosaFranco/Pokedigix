@@ -1,5 +1,8 @@
 package br.com.digix.pokedigix.personagem;
 
+import br.com.digix.pokedigix.Pokemon.FelicidadeInvalidaException;
+import br.com.digix.pokedigix.Pokemon.NivelMaiorException;
+import br.com.digix.pokedigix.Pokemon.NivelMenorException;
 import br.com.digix.pokedigix.Pokemon.Pokemon;
 import br.com.digix.pokedigix.pokemon.PokemonBuilder;
 
@@ -9,7 +12,7 @@ public class TreinadorBuilder {
     private Endereco endereco;
     private Pokemon pokemon;
 
-    public TreinadorBuilder() {
+    public TreinadorBuilder() throws NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
         this.nome = "Enzo";
         this.endereco = new EnderecoBuilder().construir();
         this.pokemon = new PokemonBuilder().construir();

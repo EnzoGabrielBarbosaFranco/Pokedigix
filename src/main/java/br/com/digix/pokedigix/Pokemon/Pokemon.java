@@ -19,12 +19,12 @@ import br.com.digix.pokedigix.tipo.Tipo;
 
 @Entity
 public class Pokemon {
-    
+
     @Id
-    
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(nullable = false, length = 25)
     private String nome;
 
@@ -35,13 +35,9 @@ public class Pokemon {
     private int felicidade;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-        name = "pokemon_tipo",
-        joinColumns = @JoinColumn(name = "pokemon_id"),
-        inverseJoinColumns = @JoinColumn(name = "tipo_id")
-    )
+    @JoinTable(name = "pokemon_tipo", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "tipo_id"))
     private Collection<Tipo> tipos;
-    
+
     @Column(nullable = false)
     private double altura;
 
@@ -58,20 +54,18 @@ public class Pokemon {
     private String treinador;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-        name = "pokemon_ataque",
-        joinColumns = @JoinColumn(name = "pokemon_id"),
-        inverseJoinColumns = @JoinColumn(name = "ataque_id")
-    )
+    @JoinTable(name = "pokemon_ataque", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "ataque_id"))
     private Collection<Ataque> ataques;
 
     public Collection<Ataque> getAtaques() {
         return ataques;
     }
 
-
     public Pokemon(String nome, int nivel, int felicidade, double altura, double peso, String genero,
-            int numeroPokedex, String treinador,Collection<Tipo> tipos, Collection<Ataque> ataques) {
+            int numeroPokedex, String treinador, Collection<Tipo> tipos, Collection<Ataque> ataques)
+            throws NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
+        validarNivel(nivel);
+        validarFelicidade(felicidade);
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
@@ -84,61 +78,93 @@ public class Pokemon {
         this.ataques = ataques;
     }
 
- 
+    private void validarFelicidade(int felicidade) throws FelicidadeInvalidaException {
+        if (felicidade < 0  || felicidade > 100) {
+            throw new FelicidadeInvalidaException();
+        }
+    }
+
+    private void validarNivel(int nivel) throws NivelMenorException, NivelMaiorException {
+        if (nivel < 1) {
+            throw new NivelMenorException();
+        } else if (nivel > 100) {
+            throw new NivelMaiorException();
+        }
+        
+    }
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public int getNivel() {
         return nivel;
     }
+
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+
     public int getFelicidade() {
         return felicidade;
     }
+
     public void setFelicidade(int felicidade) {
         this.felicidade = felicidade;
     }
-    public Collection <Tipo> getTipos() {
+
+    public Collection<Tipo> getTipos() {
         return tipos;
     }
+
     public void setTipo(Tipo tipo) {
         this.tipos = tipos;
     }
+
     public double getAltura() {
         return altura;
     }
+
     public void setAltura(double altura) {
         this.altura = altura;
     }
+
     public double getPeso() {
         return peso;
     }
+
     public void setPeso(double peso) {
         this.peso = peso;
     }
+
     public String getGenero() {
         return genero;
     }
+
     public void setGenero(String genero) {
         this.genero = genero;
     }
+
     public int getNumeroPokedex() {
         return numeroPokedex;
     }
+
     public void setNumeroPokedex(int numeroPokedex) {
         this.numeroPokedex = numeroPokedex;
     }
+
     public String getTreinador() {
         return treinador;
     }
+
     public void setTreinador(String treinador) {
         this.treinador = treinador;
     }
+
     public Long getId() {
         return this.id;
     }

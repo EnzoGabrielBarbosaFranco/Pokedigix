@@ -55,8 +55,8 @@ public class Treinador extends Personagem {
     }
 
     private void validarQuantidadeDePokemons() throws LimiteDePokemonException {
-        if(getPokemons().size() == LIMITE_POKEMON) {
-            throw new LimiteDePokemonException(); 
+        if (getPokemons().size() == LIMITE_POKEMON) {
+            throw new LimiteDePokemonException();
         }
     }
 }
