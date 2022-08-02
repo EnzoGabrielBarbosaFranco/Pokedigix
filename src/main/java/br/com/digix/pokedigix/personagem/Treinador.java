@@ -13,6 +13,9 @@ import br.com.digix.pokedigix.Pokemon.Pokemon;
 
 @Entity
 public class Treinador extends Personagem {
+
+    private static final int LIMITE_POKEMON = 6;
+
     private double dinheiro;
 
     private int nivel;
@@ -27,6 +30,7 @@ public class Treinador extends Personagem {
         this.dinheiro = 3000;
         this.nivel = 1;
         this.insignias = new ArrayList<>();
+        this.pokemons.add(primeiroPokemon);
     }
 
     public void receber(Insignia insignia) {
@@ -43,5 +47,16 @@ public class Treinador extends Personagem {
 
     public Collection<Insignia> getInsignias() {
         return insignias;
+    }
+
+    public void capturar(Pokemon pokemonACapturar) throws LimiteDePokemonException {
+        validarQuantidadeDePokemons();
+        this.pokemons.add(pokemonACapturar);
+    }
+
+    private void validarQuantidadeDePokemons() throws LimiteDePokemonException {
+        if(getPokemons().size() == LIMITE_POKEMON) {
+            throw new LimiteDePokemonException(); 
+        }
     }
 }

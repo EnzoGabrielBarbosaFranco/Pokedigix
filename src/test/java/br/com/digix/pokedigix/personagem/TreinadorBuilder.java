@@ -18,4 +18,9 @@ public class TreinadorBuilder {
     public Treinador construir() {
         return new Treinador(endereco, nome, pokemon);
     }
+
+    public TreinadorBuilder comPokemonInicial(Pokemon pokemonInicial) {
+        this.pokemon = pokemonInicial;
+        return this;
+    }
 }
