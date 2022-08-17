@@ -15,7 +15,6 @@ public class EvolucaoRepositoryTest {
 
     @Test
     public void deve_poder_criar_uma_evolucao() {
-        Long idEsperado = 1L;
         int nivelEsperado = 100;
         String pedraEsperada = "Pedra do Trovão";
         int felicidadeEsperada = 100;

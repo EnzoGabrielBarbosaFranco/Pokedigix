@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.annotations.ManyToAny;
-
 import br.com.digix.pokedigix.Pokemon.Pokemon;
 
 @Entity
@@ -28,6 +26,8 @@ public class Tipo {
 
     @ManyToMany(mappedBy = "tipos")
     private Collection<Pokemon> pokemons;
+
+    protected Tipo() {}
 
     public Collection<Pokemon> getPokemons() {
         return pokemons;
@@ -51,5 +51,8 @@ public class Tipo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setNome(String nome2) {
     }
 }

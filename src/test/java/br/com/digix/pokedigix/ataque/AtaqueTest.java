@@ -3,7 +3,6 @@ package br.com.digix.pokedigix.ataque;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.hibernate.boot.archive.scan.spi.ClassDescriptor.Categorization;
 import org.junit.jupiter.api.Test;
 
 import br.com.digix.pokedigix.Ataque.AcuraciaInvalidaException;
@@ -16,7 +15,6 @@ import br.com.digix.pokedigix.tipo.Tipo;
 public class AtaqueTest {
     @Test
     public void deve_poder_criar_um_ataque() throws AcuraciaInvalidaException, ForcaInvalidaParaCategoriaException, TipoInvalidaParaCategoriaException {
-        Long idEsperado = 1L;
         int forcaEsperada = 100;
         double acuraciaEsperada = 100;
         int pontosDePoderEsperado = 50;

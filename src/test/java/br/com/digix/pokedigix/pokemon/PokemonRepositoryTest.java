@@ -30,7 +30,6 @@ public class PokemonRepositoryTest {
 
     @Test
     public void deve_poder_criar_um_pokemon() throws NivelMenorException, NivelMaiorException, FelicidadeInvalidaException {
-        Long idEsperado = 1L;
         String nomeEsperado = "Pikachu";
         int nivelEsperado = 100;
         int felicidadeEsperada = 100;
